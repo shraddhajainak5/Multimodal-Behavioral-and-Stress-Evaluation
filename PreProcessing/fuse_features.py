@@ -1,0 +1,11 @@
+import pandas as pd
+prosodic_df = pd.read_csv("/project/msoleyma_1026/project_Interview/final_project/prosodic_features_aggregated.csv")
+facial_df = pd.read_csv("/project/msoleyma_1026/project_Interview/final_project/facial_features_aggregated.csv")
+lexical_df = pd.read_csv("/project/msoleyma_1026/project_Interview/final_project/lexical_features_structured.csv")
+labels_df = pd.read_csv("/project/msoleyma_1026/project_Interview/final_project/labels_averaged.csv")
+merged_df = prosodic_df.merge(facial_df, on="participant", how="inner")
+merged_df = merged_df.merge(lexical_df, on="participant", how="inner")
+merged_df = merged_df.merge(labels_df, on="participant", how="inner")
+merged_df.to_csv("/project/msoleyma_1026/project_Interview/final_project/fused_features.csv", index=False)
+print("Fused feature file saved as: fused_features.csv")
+print("Shape:", merged_df.shape)
